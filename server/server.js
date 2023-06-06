@@ -24,4 +24,17 @@ app.post('/login', (req, res) =>{
     })
 })
 
+spotifyApi
+    .refreshAccessToken()
+    .then(data => {
+      res.json({
+        accessToken: data.body.accessToken,
+        expiresIn: data.body.expiresIn,
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(400)
+    })
+
 app.listen(3001)
